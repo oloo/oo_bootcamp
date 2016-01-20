@@ -1,0 +1,8 @@
+# Command to setup a Docker Ruby container tied to a boot_camp directory
+docker run --name oo_boot_camp -v /c/Users/fred/src/ruby/oo_boot_camp_2015-03-09:/oo_boot_camp -w /oo_boot_camp -it ruby bash
+
+# Command to restart a prior container
+docker start -i oo_boot_camp
+
+# Command to run Rake if any file changes...
+touch /tmp/nt; while [ true ]; do if [ find . -newer /tmp/nt -type f | grep -v app/cache | wc -l -gt 0 ]; then rake; touch /tmp/nt; fi; sleep 5; done
